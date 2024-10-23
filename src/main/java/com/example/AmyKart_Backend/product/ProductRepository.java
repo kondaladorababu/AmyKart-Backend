@@ -1,6 +1,5 @@
-package com.example.AmyKart_Backend.repository;
+package com.example.AmyKart_Backend.product;
 
-import com.example.AmyKart_Backend.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

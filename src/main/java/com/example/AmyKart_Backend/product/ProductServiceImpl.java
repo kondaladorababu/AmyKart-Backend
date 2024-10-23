@@ -1,8 +1,5 @@
-package com.example.AmyKart_Backend.service.impl;
+package com.example.AmyKart_Backend.product;
 
-import com.example.AmyKart_Backend.entity.Product;
-import com.example.AmyKart_Backend.repository.ProductRepository;
-import com.example.AmyKart_Backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +14,10 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public Optional<Product> getProductById(int id) {
+        return productRepository.findById(id);
     }
 
     @Override

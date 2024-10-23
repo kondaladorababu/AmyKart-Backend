@@ -1,4 +1,4 @@
-package com.example.AmyKart_Backend.entity;
+package com.example.AmyKart_Backend.rating;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

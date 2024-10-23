@@ -1,8 +1,8 @@
-package com.example.AmyKart_Backend.entity;
+package com.example.AmyKart_Backend.product;
 
+import com.example.AmyKart_Backend.rating.Rating;
 import jakarta.persistence.*;
 
-//Entity class for Product
 @Entity
 @Table(name = "product")
 public class Product {
@@ -15,7 +15,9 @@ public class Product {
     private double price;
     private String description;
     private String category;
-    private String image;
+
+    @Lob
+    private byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rating_id")
@@ -24,7 +26,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String title, double price, String description, String category, String image, Rating rating) {
+    public Product(String title, double price, String description, String category, byte[] image, Rating rating) {
         this.title = title;
         this.price = price;
         this.description = description;
@@ -33,7 +35,14 @@ public class Product {
         this.rating = rating;
     }
 
-    //getter and setter methods
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -66,11 +75,11 @@ public class Product {
         this.category = category;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -82,36 +91,36 @@ public class Product {
         this.rating = rating;
     }
 
-    //toString method
     @Override
     public String toString() {
         return "Product{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
-                ", image='" + image + '\'' +
                 ", rating=" + rating +
                 '}';
     }
+}
 
-    //sql query with rating as a linke entity in thedatabase
-//    CREATE TABLE product (
-//    id INT AUTO_INCREMENT PRIMARY KEY,
-//    title VARCHAR(255),
-//    price DOUBLE,
-//    description VARCHAR(255),
-//    category VARCHAR(255),
-//    image VARCHAR(255),
-//    rating_id INT,
-//    FOREIGN KEY (rating_id) REFERENCES rating(id)
-//            )
-
-
+    //
     //and sql query for rating table
 //    CREATE TABLE rating (
 //    id INT AUTO_INCREMENT PRIMARY KEY,
 //    rate DOUBLE,
 //    count INT
 //    )
-}
+
+//    how to store the image  in db
+//    CREATE TABLE product (
+//    id INT AUTO_INCREMENT PRIMARY KEY,
+//    title VARCHAR(255),
+//    price DOUBLE,
+//    description VARCHAR(255),
+//    category VARCHAR(255),
+//    image BLOB,
+//    rating_id INT,
+//    FOREIGN KEY (rating_id) REFERENCES rating(id)
+//            )
+

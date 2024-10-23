@@ -1,6 +1,5 @@
-package com.example.AmyKart_Backend.service;
+package com.example.AmyKart_Backend.product;
 
-import com.example.AmyKart_Backend.entity.Product;
 import java.util.List;
 
 public interface ProductService {
