@@ -1,7 +1,10 @@
 package com.example.AmyKart_Backend.product;
 
-import com.example.AmyKart_Backend.rating.Rating;
+import com.example.AmyKart_Backend.review.Review;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -19,20 +22,22 @@ public class Product {
     @Lob
     private byte[] image;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rating_id")
-    private Rating rating;
+    @OneToMany(mappedBy = "product",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+    private List<Review> reviews;
 
     public Product() {
     }
 
-    public Product(String title, double price, String description, String category, byte[] image, Rating rating) {
+    public Product(String title, double price, String description, String category, byte[] image, List<Review> reviews) {
         this.title = title;
         this.price = price;
         this.description = description;
         this.category = category;
         this.image = image;
-        this.rating = rating;
+        this.reviews = reviews;
     }
 
     public int getId() {
@@ -83,12 +88,12 @@ public class Product {
         this.image = image;
     }
 
-    public Rating getRating() {
-        return rating;
+    public List<Review> getReview() {
+        return reviews;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public void setReview(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     @Override
@@ -99,13 +104,14 @@ public class Product {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
-                ", rating=" + rating +
+                ", image=" + image +
+                ", review=" + reviews +
                 '}';
     }
 }
 
-    //
-    //and sql query for rating table
+//
+//and sql query for rating table
 //    CREATE TABLE rating (
 //    id INT AUTO_INCREMENT PRIMARY KEY,
 //    rate DOUBLE,

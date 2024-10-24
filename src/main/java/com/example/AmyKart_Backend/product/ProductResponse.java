@@ -1,6 +1,8 @@
 package com.example.AmyKart_Backend.product;
 
-import com.example.AmyKart_Backend.rating.Rating;
+import com.example.AmyKart_Backend.review.Review;
+
+import java.util.List;
 
 public class ProductResponse {
 
@@ -10,7 +12,7 @@ public class ProductResponse {
     private final String description;
     private final String category;
     private final String imageUrl;
-    private final Rating rating;
+    private final List<Review> reviews;
 
     public ProductResponse(Product product) {
         this.id = product.getId();
@@ -19,7 +21,7 @@ public class ProductResponse {
         this.description = product.getDescription();
         this.category = product.getCategory();
         this.imageUrl = "/products/image/" + product.getId();
-        this.rating = product.getRating();
+        this.reviews = product.getReview();
     }
 
     public int getId() {
@@ -46,7 +48,7 @@ public class ProductResponse {
         return imageUrl;
     }
 
-    public Rating getRating() {
-        return rating;
+    public List<Review> getReviews() {
+        return reviews;
     }
 }

@@ -44,14 +44,8 @@ public class ProductServiceImpl implements ProductService {
     public boolean updateProduct(Integer id, Product product) {
         Optional<Product> theProduct = productRepository.findById(id);
         if (theProduct.isPresent()) {
-            Product updatedProduct = theProduct.get();
-            updatedProduct.setTitle(product.getTitle());
-            updatedProduct.setPrice(product.getPrice());
-            updatedProduct.setDescription(product.getDescription());
-            updatedProduct.setCategory(product.getCategory());
-            updatedProduct.setImage(product.getImage());
-            updatedProduct.setRating(product.getRating());
-            productRepository.save(updatedProduct);
+            product.setId(id);
+            productRepository.save(product);
             return true;
         }
         return false;
