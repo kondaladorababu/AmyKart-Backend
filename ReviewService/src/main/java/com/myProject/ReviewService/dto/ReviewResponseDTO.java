@@ -4,16 +4,18 @@ public class ReviewResponseDTO {
     private int reviewId;
     private int productId;
     private int userId;
+    private String userName;
     private int rating;
     private String reviewText;
 
     public ReviewResponseDTO() {
     }
 
-    public ReviewResponseDTO(int reviewId, int productId, int userId, int rating, String reviewText) {
+    public ReviewResponseDTO(int reviewId, int productId, int userId, String userName, int rating, String reviewText) {
         this.reviewId = reviewId;
         this.productId = productId;
         this.userId = userId;
+        this.userName = userName;
         this.rating = rating;
         this.reviewText = reviewText;
     }
@@ -40,6 +42,14 @@ public class ReviewResponseDTO {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getRating() {

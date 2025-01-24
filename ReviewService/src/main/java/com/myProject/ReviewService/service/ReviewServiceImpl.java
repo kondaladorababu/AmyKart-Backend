@@ -20,6 +20,7 @@ public class ReviewServiceImpl implements ReviewService {
         Review review = new Review();
         review.setProductId(productId);
         review.setUserId(reviewRequest.getUserId());
+        review.setUsername(reviewRequest.getUserName());
         review.setRating(reviewRequest.getRating());
         review.setComment(reviewRequest.getReviewText());
         reviewRepository.save(review);
@@ -44,6 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
             responseDTO.setReviewId(review.getId());
             responseDTO.setProductId(review.getProductId());
             responseDTO.setUserId(review.getUserId());
+            responseDTO.setUserName(review.getUsername());
             responseDTO.setRating(review.getRating());
             responseDTO.setReviewText(review.getComment());
             return responseDTO;

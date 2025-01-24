@@ -14,6 +14,8 @@ public class Review {
     @Column(name = "user_id")
     int userId;
 
+    String username;
+
     @Column(name = "product_id")
     int productId;
 
@@ -57,6 +59,14 @@ public class Review {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getProductId() {
