@@ -13,5 +13,7 @@ public interface ProductService {
 
     public List<ProductResponseDTO> getProductsByCategory(String category);
 
+    public List<ProductResponseDTO> getProductsByFilters(String category, Double minPrice, Double maxPrice, List<String> brands, Double minRating);
+
     public String deleteProduct(int productId);
 }
