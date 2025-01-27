@@ -1,5 +1,6 @@
 package com.myProject.ProductService.Controller;
 
+import com.myProject.ProductService.dto.ProductDetailsDTO;
 import com.myProject.ProductService.dto.ProductRequestDTO;
 import com.myProject.ProductService.dto.ProductResponseDTO;
 import com.myProject.ProductService.service.ProductService;
@@ -63,6 +64,12 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable int productId) {
         String response = productService.deleteProduct(productId);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/details/{productId}")
+    public ResponseEntity<ProductDetailsDTO> getProductDetails(@PathVariable int productId) {
+        ProductDetailsDTO productDetails = productService.getProductDetails(productId);
+        return ResponseEntity.ok(productDetails);
     }
 
 }

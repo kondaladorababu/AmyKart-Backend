@@ -20,9 +20,9 @@ public class ReviewServiceImpl implements ReviewService {
         Review review = new Review();
         review.setProductId(productId);
         review.setUserId(reviewRequest.getUserId());
-        review.setUsername(reviewRequest.getUserName());
+        review.setUserName(reviewRequest.getUserName());
         review.setRating(reviewRequest.getRating());
-        review.setComment(reviewRequest.getReviewText());
+        review.setComment(reviewRequest.getComment());
         reviewRepository.save(review);
         return "Review added successfully!";
     }
@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
         Review review = reviewRepository.findById(reviewId).orElse(null);
         if (review != null && review.getProductId() == (productId) && review.getUserId() == (reviewRequest.getUserId())) {
             review.setRating(reviewRequest.getRating());
-            review.setComment(reviewRequest.getReviewText());
+            review.setComment(reviewRequest.getComment());
             reviewRepository.save(review);
             return "Review updated successfully!";
         }
@@ -45,9 +45,9 @@ public class ReviewServiceImpl implements ReviewService {
             responseDTO.setReviewId(review.getId());
             responseDTO.setProductId(review.getProductId());
             responseDTO.setUserId(review.getUserId());
-            responseDTO.setUserName(review.getUsername());
+            responseDTO.setUserName(review.getUserName());
             responseDTO.setRating(review.getRating());
-            responseDTO.setReviewText(review.getComment());
+            responseDTO.setComment(review.getComment());
             return responseDTO;
         }).collect(Collectors.toList());
     }

@@ -1,38 +1,32 @@
-package com.myProject.ReviewService.model;
+package com.myProject.ProductService.dto;
 
-import jakarta.persistence.*;
 
-@Entity
-public class Review {
+public class ReviewDTO {
+    private int reviewId;
+    private int rating;
+    private String comment;
+    private int userId;
+    private String userName;
+    private int productId;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    int rating;
-    String comment;
-
-    @Column(name = "user_id")
-    int userId;
-    String userName;
-    @Column(name = "product_id")
-    int productId;
-
-    public Review() {
+    public ReviewDTO() {
     }
 
-    public Review(int rating, String comment, int userId, int productId) {
+    public ReviewDTO(int reviewId, int rating, String comment, int userId, String userName, int productId) {
+        this.reviewId = reviewId;
         this.rating = rating;
         this.comment = comment;
         this.userId = userId;
+        this.userName = userName;
         this.productId = productId;
     }
 
-    public int getId() {
-        return id;
+    public int getReviewId() {
+        return reviewId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
     public int getRating() {

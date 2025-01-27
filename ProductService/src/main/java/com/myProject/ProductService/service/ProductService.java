@@ -1,5 +1,6 @@
 package com.myProject.ProductService.service;
 
+import com.myProject.ProductService.dto.ProductDetailsDTO;
 import com.myProject.ProductService.dto.ProductRequestDTO;
 import com.myProject.ProductService.dto.ProductResponseDTO;
 
@@ -20,4 +21,6 @@ public interface ProductService {
             List<String> types, Double minRating, Double minDiscount);
 
     public String deleteProduct(int productId);
+
+    public ProductDetailsDTO getProductDetails(int productId);
 }

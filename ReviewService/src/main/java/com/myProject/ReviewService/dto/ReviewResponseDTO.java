@@ -6,18 +6,18 @@ public class ReviewResponseDTO {
     private int userId;
     private String userName;
     private int rating;
-    private String reviewText;
+    private String comment;
 
     public ReviewResponseDTO() {
     }
 
-    public ReviewResponseDTO(int reviewId, int productId, int userId, String userName, int rating, String reviewText) {
+    public ReviewResponseDTO(int reviewId, int productId, int userId, String userName, int rating, String comment) {
         this.reviewId = reviewId;
         this.productId = productId;
         this.userId = userId;
         this.userName = userName;
         this.rating = rating;
-        this.reviewText = reviewText;
+        this.comment = comment;
     }
 
     public int getReviewId() {
@@ -60,11 +60,11 @@ public class ReviewResponseDTO {
         this.rating = rating;
     }
 
-    public String getReviewText() {
-        return reviewText;
+    public String getComment() {
+        return comment;
     }
 
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
+    public void setComment(String reviewText) {
+        this.comment = reviewText;
     }
 }

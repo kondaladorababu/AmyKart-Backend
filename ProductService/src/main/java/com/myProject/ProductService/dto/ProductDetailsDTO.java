@@ -1,16 +1,9 @@
-package com.myProject.ProductService.model;
+package com.myProject.ProductService.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.util.List;
 
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDetailsDTO {
     private int id;
-
     private String title;
     private Double price;
     private String description;
@@ -18,7 +11,6 @@ public class Product {
     private String category;
 
     // Optional fields for filtering
-    private Double rating;
     private String brand;
     private String size;
     private String color;
@@ -30,12 +22,15 @@ public class Product {
     private String genre;
     private String language;
     private String type;
+    private Double rating;
     private Double discount;
 
-    public Product() {
+    List<ReviewDTO> reviews;
+
+    public ProductDetailsDTO() {
     }
 
-    public Product(int id, String title, Double price, String description, String image, String category, String brand, String size, String color, String material, String fit, String occasion, String neck, String author, String genre, String language, String type, Double rating, Double discount) {
+    public ProductDetailsDTO(int id, String title, Double price, String description, String image, String category, String brand, String size, String color, String material, String fit, String occasion, String neck, String author, String genre, String language, String type, Double rating, Double discount, List<ReviewDTO> reviews) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -55,6 +50,7 @@ public class Product {
         this.type = type;
         this.rating = rating;
         this.discount = discount;
+        this.reviews = reviews;
     }
 
     public int getId() {
@@ -207,5 +203,13 @@ public class Product {
 
     public void setDiscount(Double discount) {
         this.discount = discount;
+    }
+
+    public List<ReviewDTO> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewDTO> reviews) {
+        this.reviews = reviews;
     }
 }
