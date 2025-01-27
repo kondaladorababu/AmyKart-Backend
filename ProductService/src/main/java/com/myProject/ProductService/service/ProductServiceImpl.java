@@ -1,7 +1,10 @@
 package com.myProject.ProductService.service;
 
+import com.myProject.ProductService.client.ReviewClient;
+import com.myProject.ProductService.dto.ProductDetailsDTO;
 import com.myProject.ProductService.dto.ProductRequestDTO;
 import com.myProject.ProductService.dto.ProductResponseDTO;
+import com.myProject.ProductService.dto.ReviewDTO;
 import com.myProject.ProductService.model.Product;
 import com.myProject.ProductService.repository.ProductRepository;
 import com.myProject.ProductService.specification.ProductSpecification;
@@ -17,6 +20,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ReviewClient reviewClient;
+
 
     @Override
     public String addProduct(ProductRequestDTO productRequest) {
@@ -61,8 +68,7 @@ public class ProductServiceImpl implements ProductService {
             String category, Double minPrice, Double maxPrice, List<String> brands, List<String> sizes,
             List<String> colors, List<String> materials, List<String> fits, List<String> occasions,
             List<String> necks, List<String> authors, List<String> genres, List<String> languages,
-            List<String> types, Double minRating, Double minDiscount)
-    {
+            List<String> types, Double minRating, Double minDiscount) {
         Specification<Product> spec = Specification.where(ProductSpecification.hasCategory(category))
                 .and(minPrice != null && maxPrice == null ? ProductSpecification.hasPriceLessThanEqualTo(minPrice) : null)
                 .and(minPrice != null && maxPrice != null ? ProductSpecification.hasPriceBetween(minPrice, maxPrice) : null)
@@ -94,6 +100,39 @@ public class ProductServiceImpl implements ProductService {
         return "Product not found";
     }
 
+    @Override
+    public ProductDetailsDTO getProductDetails(int productId) {
+        Product product = productRepository.findById(productId).orElse(null);
+        if (product == null) {
+            return null;
+        }
+
+        ProductDetailsDTO productDetails = new ProductDetailsDTO();
+        productDetails.setId(product.getId());
+        productDetails.setTitle(product.getTitle());
+        productDetails.setPrice(product.getPrice());
+        productDetails.setDescription(product.getDescription());
+        productDetails.setImage(product.getImage());
+        productDetails.setCategory(product.getCategory());
+        productDetails.setBrand(product.getBrand());
+        productDetails.setSize(product.getSize());
+        productDetails.setColor(product.getColor());
+        productDetails.setMaterial(product.getMaterial());
+        productDetails.setFit(product.getFit());
+        productDetails.setOccasion(product.getOccasion());
+        productDetails.setNeck(product.getNeck());
+        productDetails.setAuthor(product.getAuthor());
+        productDetails.setGenre(product.getGenre());
+        productDetails.setLanguage(product.getLanguage());
+        productDetails.setType(product.getType());
+        productDetails.setRating(product.getRating());
+        productDetails.setDiscount(product.getDiscount());
+
+        List<ReviewDTO> reviews = reviewClient.getReviewsByProductId(productId);
+        productDetails.setReviews(reviews);
+
+        return productDetails;
+    }
 
     //Helper Functions
     public Product createProductFromRequest(Product product, ProductRequestDTO productRequest) {

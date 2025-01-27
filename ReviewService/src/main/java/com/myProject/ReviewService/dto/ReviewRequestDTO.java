@@ -5,17 +5,17 @@ public class ReviewRequestDTO {
     private int userId;
     private String userName;
     private int rating;
-    private String reviewText;
+    private String comment;
 
     public ReviewRequestDTO() {
     }
 
-    public ReviewRequestDTO(int productId, int userId, int rating,String userName, String reviewText) {
+    public ReviewRequestDTO(int productId, int userId, int rating,String userName, String comment) {
         this.productId = productId;
         this.userId = userId;
         this.userName=userName;
         this.rating = rating;
-        this.reviewText = reviewText;
+        this.comment = comment;
     }
 
     public int getProductId() {
@@ -50,11 +50,11 @@ public class ReviewRequestDTO {
         this.rating = rating;
     }
 
-    public String getReviewText() {
-        return reviewText;
+    public String getComment() {
+        return comment;
     }
 
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
