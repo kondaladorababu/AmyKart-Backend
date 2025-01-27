@@ -57,11 +57,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponseDTO> getProductsByFilters(String category, Double minPrice, Double maxPrice, List<String> brands, Double minRating) {
-        Specification<Product> spec = Specification.where(ProductSpecification.hasCategory(category)).and(minPrice != null && maxPrice != null ? ProductSpecification.hasPriceBetween(minPrice, maxPrice) : null).and(brands != null && !brands.isEmpty() ? ProductSpecification.hasBrand(brands) : null).and(minRating != null ? ProductSpecification.hasRatingGreaterThan(minRating) : null);
+    public List<ProductResponseDTO> getProductsByFilters(
+            String category, Double minPrice, Double maxPrice, List<String> brands, List<String> sizes,
+            List<String> colors, List<String> materials, List<String> fits, List<String> occasions,
+            List<String> necks, List<String> authors, List<String> genres, List<String> languages,
+            List<String> types, Double minRating, Double minDiscount)
+    {
+        Specification<Product> spec = Specification.where(ProductSpecification.hasCategory(category))
+                .and(minPrice != null && maxPrice == null ? ProductSpecification.hasPriceLessThanEqualTo(minPrice) : null)
+                .and(minPrice != null && maxPrice != null ? ProductSpecification.hasPriceBetween(minPrice, maxPrice) : null)
+                .and(brands != null && !brands.isEmpty() ? ProductSpecification.hasBrand(brands) : null)
+                .and(sizes != null && !sizes.isEmpty() ? ProductSpecification.hasSize(sizes) : null)
+                .and(colors != null && !colors.isEmpty() ? ProductSpecification.hasColor(colors) : null)
+                .and(materials != null && !materials.isEmpty() ? ProductSpecification.hasMaterial(materials) : null)
+                .and(fits != null && !fits.isEmpty() ? ProductSpecification.hasFit(fits) : null)
+                .and(occasions != null && !occasions.isEmpty() ? ProductSpecification.hasOccasion(occasions) : null)
+                .and(necks != null && !necks.isEmpty() ? ProductSpecification.hasNeck(necks) : null)
+                .and(authors != null && !authors.isEmpty() ? ProductSpecification.hasAuthor(authors) : null)
+                .and(genres != null && !genres.isEmpty() ? ProductSpecification.hasGenre(genres) : null)
+                .and(languages != null && !languages.isEmpty() ? ProductSpecification.hasLanguage(languages) : null)
+                .and(types != null && !types.isEmpty() ? ProductSpecification.hasType(types) : null)
+                .and(minRating != null ? ProductSpecification.hasRatingGreaterThan(minRating) : null)
+                .and(minDiscount != null ? ProductSpecification.hasDiscountGreaterThanEqualTo(minDiscount) : null);
 
         List<Product> products = productRepository.findAll(spec);
-        return null;
+        return createProductResponseDTO(products);
     }
 
     @Override
