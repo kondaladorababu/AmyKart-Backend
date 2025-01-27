@@ -13,7 +13,11 @@ public interface ProductService {
 
     public List<ProductResponseDTO> getProductsByCategory(String category);
 
-    public List<ProductResponseDTO> getProductsByFilters(String category, Double minPrice, Double maxPrice, List<String> brands, Double minRating);
+    public List<ProductResponseDTO> getProductsByFilters(
+            String category, Double minPrice, Double maxPrice, List<String> brands, List<String> sizes,
+            List<String> colors, List<String> materials, List<String> fits, List<String> occasions,
+            List<String> necks, List<String> authors, List<String> genres, List<String> languages,
+            List<String> types, Double minRating, Double minDiscount);
 
     public String deleteProduct(int productId);
 }
