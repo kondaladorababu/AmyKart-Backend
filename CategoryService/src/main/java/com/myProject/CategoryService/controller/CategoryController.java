@@ -2,6 +2,7 @@ package com.myProject.CategoryService.controller;
 
 import com.myProject.CategoryService.dto.CategoryRequestDTO;
 import com.myProject.CategoryService.dto.CategoryResponseDTO;
+import com.myProject.CategoryService.dto.ProductDTO;
 import com.myProject.CategoryService.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,12 @@ public class CategoryController {
     @DeleteMapping("/{category}")
     public String deleteCategory(@PathVariable String category) {
         return categoryService.deleteCategory(category);
+    }
+
+    @GetMapping("/{category}/products")
+    public ResponseEntity<List<ProductDTO>> getProductsBasedOnCategory(@PathVariable String category) {
+        List<ProductDTO> products = categoryService.getProductsBasedOnCategory(category);
+        return ResponseEntity.ok(products);
     }
 
 }
