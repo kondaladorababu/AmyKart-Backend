@@ -2,6 +2,7 @@ package com.myProject.CategoryService.service;
 
 import com.myProject.CategoryService.dto.CategoryRequestDTO;
 import com.myProject.CategoryService.dto.CategoryResponseDTO;
+import com.myProject.CategoryService.dto.ProductDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface CategoryService {
 
     public List<CategoryResponseDTO> getAllCategories();
 
+    public List<ProductDTO> getProductsBasedOnCategory(String category);
 }
