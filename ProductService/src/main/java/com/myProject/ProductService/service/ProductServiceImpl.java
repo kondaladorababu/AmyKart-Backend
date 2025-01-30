@@ -8,6 +8,7 @@ import com.myProject.ProductService.dto.ReviewDTO;
 import com.myProject.ProductService.model.Product;
 import com.myProject.ProductService.repository.ProductRepository;
 import com.myProject.ProductService.specification.ProductSpecification;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ReviewClient reviewClient;
+
+    private static final String PRODUCT_SERVICE = "productService";
 
 
     @Override
@@ -101,6 +104,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @CircuitBreaker(name = PRODUCT_SERVICE, fallbackMethod = "fallbackGetProductDetails")
     public ProductDetailsDTO getProductDetails(int productId) {
         Product product = productRepository.findById(productId).orElse(null);
         if (product == null) {
@@ -132,6 +136,13 @@ public class ProductServiceImpl implements ProductService {
         productDetails.setReviews(reviews);
 
         return productDetails;
+    }
+
+    public ProductDetailsDTO fallbackGetProductDetails(int productId, Throwable throwable) {
+        // Handle the fallback logic here
+        ProductDetailsDTO fallbackResponse = new ProductDetailsDTO();
+        fallbackResponse.setDescription("Fallback response: Review-Service is unavailable.");
+        return fallbackResponse;
     }
 
     //Helper Functions

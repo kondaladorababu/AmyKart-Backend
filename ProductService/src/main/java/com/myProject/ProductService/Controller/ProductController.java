@@ -71,5 +71,4 @@ public class ProductController {
         ProductDetailsDTO productDetails = productService.getProductDetails(productId);
         return ResponseEntity.ok(productDetails);
     }
-
 }

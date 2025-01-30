@@ -6,6 +6,8 @@ import com.myProject.CategoryService.dto.CategoryResponseDTO;
 import com.myProject.CategoryService.dto.ProductDTO;
 import com.myProject.CategoryService.model.Category;
 import com.myProject.CategoryService.repository.CategoryRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private ProductClient productClient;
+
+    private static final String CATEGORY_SERVICE = "CategoryService";
+    private static  int count = 1;
 
     @Override
     public String addCategory(CategoryRequestDTO category) {
@@ -74,8 +79,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+//    @CircuitBreaker(name = CATEGORY_SERVICE, fallbackMethod = "getProductsBasedOnCategoryFallback")
+    @Retry(name=CATEGORY_SERVICE, fallbackMethod = "getProductsBasedOnCategoryFallback")
     public List<ProductDTO> getProductsBasedOnCategory(String category) {
+        System.out.println("Count: " + count++);
         List<ProductDTO> products = productClient.getProductsByCategoryName(category);
         return products;
+    }
+
+    public List<ProductDTO> getProductsBasedOnCategoryFallback(String category, Throwable throwable) {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setAuthor("Fall Back Author");
+        productDTO.setCategory("Fall Back Category Products");
+        productDTO.setDescription("Fallback method - No products found");
+
+        return List.of(productDTO);
     }
 }
