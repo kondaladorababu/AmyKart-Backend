@@ -79,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-//    @CircuitBreaker(name = CATEGORY_SERVICE, fallbackMethod = "getProductsBasedOnCategoryFallback")
+    @CircuitBreaker(name = CATEGORY_SERVICE, fallbackMethod = "getProductsBasedOnCategoryFallback")
     @Retry(name=CATEGORY_SERVICE, fallbackMethod = "getProductsBasedOnCategoryFallback")
     public List<ProductDTO> getProductsBasedOnCategory(String category) {
         System.out.println("Count: " + count++);
