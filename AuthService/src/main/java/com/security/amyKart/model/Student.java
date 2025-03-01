@@ -1,4 +1,4 @@
-package com.security.SecurityLearn.model;
+package com.security.amyKart.model;
 
 public class Student {
 

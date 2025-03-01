@@ -1,7 +1,7 @@
-package com.security.SecurityLearn.service;
+package com.security.amyKart.service;
 
-import com.security.SecurityLearn.Repository.UserRepo;
-import com.security.SecurityLearn.model.Users;
+import com.security.amyKart.Repository.UserRepo;
+import com.security.amyKart.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

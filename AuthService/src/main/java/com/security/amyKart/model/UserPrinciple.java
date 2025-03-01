@@ -1,4 +1,4 @@
-package com.security.SecurityLearn.model;
+package com.security.amyKart.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

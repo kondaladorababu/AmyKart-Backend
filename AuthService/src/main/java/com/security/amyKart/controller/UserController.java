@@ -1,7 +1,7 @@
-package com.security.SecurityLearn.controller;
+package com.security.amyKart.controller;
 
-import com.security.SecurityLearn.model.Users;
-import com.security.SecurityLearn.service.UserService;
+import com.security.amyKart.model.Users;
+import com.security.amyKart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

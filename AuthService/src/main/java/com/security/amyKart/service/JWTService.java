@@ -1,4 +1,4 @@
-package com.security.SecurityLearn.service;
+package com.security.amyKart.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

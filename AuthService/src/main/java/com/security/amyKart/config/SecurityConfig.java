@@ -1,4 +1,4 @@
-package com.security.SecurityLearn.config;
+package com.security.amyKart.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,13 +33,10 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("register", "/h2-console/**", "/login").permitAll() // Allow access to H2 console
+                        .requestMatchers("register","/login", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .headers(headers -> headers.addHeaderWriter((request, response) -> {
-                    response.setHeader("X-Frame-Options", "SAMEORIGIN");
-                }))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

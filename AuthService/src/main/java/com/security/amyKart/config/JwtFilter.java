@@ -1,7 +1,7 @@
-package com.security.SecurityLearn.config;
+package com.security.amyKart.config;
 
-import com.security.SecurityLearn.service.JWTService;
-import com.security.SecurityLearn.service.MyUserDetailsService;
+import com.security.amyKart.service.JWTService;
+import com.security.amyKart.service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

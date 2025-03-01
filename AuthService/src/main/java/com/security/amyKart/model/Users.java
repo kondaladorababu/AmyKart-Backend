@@ -1,4 +1,4 @@
-package com.security.SecurityLearn.model;
+package com.security.amyKart.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;

@@ -1,8 +1,8 @@
-package com.security.SecurityLearn.service;
+package com.security.amyKart.service;
 
-import com.security.SecurityLearn.Repository.UserRepo;
-import com.security.SecurityLearn.model.UserPrinciple;
-import com.security.SecurityLearn.model.Users;
+import com.security.amyKart.Repository.UserRepo;
+import com.security.amyKart.model.UserPrinciple;
+import com.security.amyKart.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
