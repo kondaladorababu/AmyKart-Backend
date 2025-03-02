@@ -3,15 +3,13 @@ package com.security.amyKart.controller;
 import com.security.amyKart.model.Student;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/student")
 public class StudentController {
 
     List<Student> students = new ArrayList<>();
@@ -21,22 +19,23 @@ public class StudentController {
         students.add(new Student(2, "Jane", "Mathematics"));
     }
 
-    @GetMapping("/")
+    @GetMapping("/welcome")
     public String home() {
         return "Welcome to the home page";
     }
 
-    @GetMapping("/student")
+    @GetMapping
     public List<Student> student() {
         return students;
     }
 
     @GetMapping("/csrf-token")
     public CsrfToken csrf(HttpServletRequest request) {
+        System.out.println("CSRF token: " + request.getHeader("X-CSRF-TOKEN"));
         return (CsrfToken) request.getAttribute("_csrf");
     }
 
-    @PostMapping("/student")
+    @PostMapping
     public Student registerNewStudent(@RequestBody Student student) {
         students.add(student);
         return student;
